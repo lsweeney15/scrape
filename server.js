@@ -33,6 +33,40 @@ app.get("/all", function (req, res){
 });
 });
 
+// A GET route for scraping the NYT website
+app.get("/scrape", function(req, res) {
+  
+  request("https://www.nytimes.com/", function(error, response, html) {
+    var $ = cheerio.load(html);
+
+        // Now, we grab every h2 within an article tag, and do the following:
+        $(".title").each(function(i, element) {
+        
+          // Add the text and href of every link, and save them as properties of the result object
+          var title = $(this).children("a").text();
+          var link = $(this).children("a").attr("href");
+          
+          if (title && link) {
+            db.scrapedData.save({
+              title: title,
+              link: link
+            },
+            function (errpr, saved) {
+              if (error) {
+                console.log(error);
+              }
+              else {
+                console.log(saved);
+              }
+            });
+          }
+          });
+        });
+
+        // If we were able to successfully scrape and save an Article, send a message to the client
+        res.send("Scrape Complete");
+    });
+
 // Our scraping tools
 // Axios is a promised-based http library, similar to jQuery's Ajax method
 // It works on the client and on the server
@@ -64,12 +98,6 @@ mongoose.connect("mongodb://localhost/week18Populater");
 
 // Routes
 
-// A GET route for scraping the echoJS website
-app.get("/scrape", function(req, res) {
-  // First, we grab the body of the html with request
-  axios.get("http://www.echojs.com/").then(function(response) {
-    // Then, we load that into cheerio and save it to $ for a shorthand selector
-    var $ = cheerio.load(response.data);
 
     // Now, we grab every h2 within an article tag, and do the following:
     $("article h2").each(function(i, element) {
