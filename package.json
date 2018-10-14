@@ -1,29 +1,30 @@
 {
-  "name": "scrape",
+  "name": "mongodbhd",
   "version": "1.0.0",
   "description": "",
   "main": "index.js",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1"
+    "test": "echo \"Error: no test specified\" && exit 1",
+    "start": "node server.js"
   },
   "repository": {
     "type": "git",
-    "url": "git+https://github.com/lsweeney15/scrape.git"
+    "url": "git+https://github.com/Ricardo1967/MongoDBHD.git"
   },
-  "author": "Liam",
+  "author": "",
   "license": "ISC",
   "bugs": {
-    "url": "https://github.com/lsweeney15/scrape/issues"
+    "url": "https://github.com/Ricardo1967/MongoDBHD/issues"
   },
-  "homepage": "https://github.com/lsweeney15/scrape#readme",
+  "homepage": "https://github.com/Ricardo1967/MongoDBHD#readme",
   "dependencies": {
-    "axios": "^0.18.0",
     "body-parser": "^1.18.3",
     "cheerio": "^1.0.0-rc.2",
     "express": "^4.16.3",
     "express-handlebars": "^3.0.0",
-    "mongojs": "^2.6.0",
-    "mongoose": "^5.2.15",
+    "mongoose": "^5.3.1",
+    "morgan": "^1.9.1",
     "request": "^2.88.0"
-  }
+  },
+  "devDependencies": {}
 }
